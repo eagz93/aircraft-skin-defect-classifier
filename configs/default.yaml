@@ -1,0 +1,85 @@
+# Hiperparámetros por defecto — Aircraft Skin Defect Classifier
+
+# Dataset
+dataset:
+  img_size_mlp: 128
+  img_size_cnn: 224
+  batch_size: 32
+  num_workers: 4
+  train_ratio: 0.70
+  val_ratio: 0.15
+  seed: 42
+
+# MLP (Etapa 1)
+mlp:
+  input_dim: 16384  # 128*128
+  dropout: 0.3
+  lr: 0.001
+  weight_decay: 0.0001
+  epochs: 30
+  patience: 7
+
+# CNN (Etapa 2)
+cnn:
+  dropout: 0.5
+  lr: 0.001
+  weight_decay: 0.0001
+  epochs: 40
+  patience: 10
+  scheduler: plateau
+
+# CNN Deep (Etapa 2 - ablation)
+cnn_deep:
+  dropout: 0.5
+  lr: 0.0005
+  weight_decay: 0.0001
+  epochs: 40
+  patience: 10
+
+# ResNet50 (Etapa 3)
+resnet50:
+  lr_head: 0.001
+  lr_finetune: 0.0001
+  weight_decay: 0.0001
+  epochs_frozen: 10
+  epochs_finetune: 20
+  patience: 7
+  unfreeze_layers: 2
+
+# Vision Transformer (Etapa 3)
+vit:
+  model_name: "google/vit-base-patch16-224"
+  lr_head: 0.001
+  lr_finetune: 0.00005
+  weight_decay: 0.01
+  epochs_frozen: 10
+  epochs_finetune: 20
+  patience: 7
+  unfreeze_layers: 3
+
+# VAE (Etapa 4)
+vae:
+  img_size: 64
+  latent_dim: 128
+  lr: 0.001
+  beta: 1.0
+  epochs: 50
+  batch_size: 64
+
+# Conditional GAN (Etapa 4)
+cgan:
+  img_size: 64
+  latent_dim: 100
+  lr: 0.0002
+  epochs: 100
+  batch_size: 64
+
+# LoRA (Etapa 5)
+lora:
+  r: 8
+  lora_alpha: 16
+  lora_dropout: 0.1
+  target_modules: ["query", "value"]
+  lr: 0.0003
+  epochs: 15
+  patience: 5
