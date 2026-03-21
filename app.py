@@ -44,7 +44,7 @@ IMAGENET_STD = [0.229, 0.224, 0.225]
 
 DEFECT_DESCRIPTIONS = {
     "crack": (
-        "🔴 **Grieta (Crack)**\n\n"
+        "**Grieta (Crack)**\n\n"
         "Fractura visible en la superficie metálica de la aeronave. "
         "Este tipo de daño puede comprometer la integridad estructural.\n\n"
         "**Severidad**: Alta\n"
@@ -52,7 +52,7 @@ DEFECT_DESCRIPTIONS = {
         "Evaluar longitud, profundidad y propagación. Posible reparación estructural."
     ),
     "dent": (
-        "🟠 **Abolladura (Dent)**\n\n"
+        "**Abolladura (Dent)**\n\n"
         "Deformación cóncava en la superficie del fuselaje. "
         "Puede ser causada por impacto de objetos, granizo o manejo inadecuado.\n\n"
         "**Severidad**: Media-Alta\n"
@@ -60,7 +60,7 @@ DEFECT_DESCRIPTIONS = {
         "Comparar con límites de tolerancia del SRM (Structural Repair Manual)."
     ),
     "scratch": (
-        "🟡 **Rayón (Scratch)**\n\n"
+        "**Rayón (Scratch)**\n\n"
         "Daño superficial lineal en la piel del avión. "
         "Generalmente causado por contacto con herramientas o equipaje.\n\n"
         "**Severidad**: Baja-Media\n"
@@ -68,7 +68,7 @@ DEFECT_DESCRIPTIONS = {
         "tratamiento anticorrosivo, requiere re-tratamiento y sellado."
     ),
     "missing_head": (
-        "🔴 **Cabeza de Remache Faltante (Missing Head)**\n\n"
+        "**Cabeza de Remache Faltante (Missing Head)**\n\n"
         "Remache sin cabeza visible, indicando falla en la sujeción. "
         "Compromete la unión de paneles estructurales.\n\n"
         "**Severidad**: Alta\n"
@@ -76,7 +76,7 @@ DEFECT_DESCRIPTIONS = {
         "Inspeccionar remaches adyacentes por posible efecto dominó."
     ),
     "paint_off": (
-        "🟡 **Desprendimiento de Pintura (Paint Off)**\n\n"
+        "**Desprendimiento de Pintura (Paint Off)**\n\n"
         "Pérdida del recubrimiento protector de la superficie. "
         "Expone el metal base a condiciones ambientales y corrosión.\n\n"
         "**Severidad**: Baja-Media\n"
@@ -217,7 +217,7 @@ with gr.Blocks(
 ) as demo:
     gr.Markdown(
         """
-        # ✈️ Aircraft Skin Defect Classifier
+        # Aircraft Skin Defect Classifier
         
         Sistema de IA para **detección y clasificación de defectos** en superficies 
         de aeronaves mediante inspección visual automatizada.
@@ -232,17 +232,17 @@ with gr.Blocks(
     with gr.Row():
         with gr.Column(scale=1):
             input_image = gr.Image(
-                label="📷 Sube imagen de inspección",
+                label="Sube imagen de inspección",
                 type="numpy",
             )
-            submit_btn = gr.Button("🔍 Analizar Defecto", variant="primary", size="lg")
+            submit_btn = gr.Button("Analizar Defecto", variant="primary", size="lg")
 
         with gr.Column(scale=1):
-            output_cam = gr.Image(label="🔥 Grad-CAM — Mapa de Atención")
-            output_label = gr.Label(num_top_classes=5, label="📊 Clasificación")
+            output_cam = gr.Image(label="Grad-CAM — Mapa de Atención")
+            output_label = gr.Label(num_top_classes=5, label="Clasificación")
 
     with gr.Row():
-        output_desc = gr.Markdown(label="📋 Diagnóstico")
+        output_desc = gr.Markdown(label="Diagnóstico")
 
     submit_btn.click(
         fn=predict_defect,

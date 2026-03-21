@@ -177,7 +177,7 @@ def train_classifier(
                 model.save_pretrained(str(save_dir / f"{model_name}_best_hf"))
             else:
                 torch.save(model.state_dict(), best_model_path)
-            print(f"  ✓ Mejor modelo guardado (val_acc={val_acc:.4f})")
+            print(f"  Mejor modelo guardado (val_acc={val_acc:.4f})")
         else:
             epochs_no_improve += 1
             if epochs_no_improve >= patience:

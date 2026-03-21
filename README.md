@@ -1,4 +1,4 @@
-# Aircraft Skin Defect Classifier ✈️
+# Aircraft Skin Defect Classifier
 
 Sistema progresivo de Deep Learning para la detección y clasificación de defectos en superficies de aeronaves, desarrollado como proyecto final del curso de Deep Learning — Maestría en Ciencia de Datos.
 
@@ -111,7 +111,7 @@ El demo permite:
 
 ## Demo en Línea
 
-🔗 [HuggingFace Spaces](https://huggingface.co/spaces/TU_USUARIO/aircraft-skin-defect-classifier) *(se publicará en Semana 5)*
+[HuggingFace Spaces](https://huggingface.co/spaces/TU_USUARIO/aircraft-skin-defect-classifier) *(se publicará en Semana 5)*
 
 ## Stack Tecnológico
 
