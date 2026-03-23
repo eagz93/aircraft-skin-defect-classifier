@@ -121,7 +121,7 @@ def train_classifier(
     if scheduler_type == "cosine":
         scheduler = CosineAnnealingLR(optimizer, T_max=num_epochs, eta_min=lr * 0.01)
     else:
-        scheduler = ReduceLROnPlateau(optimizer, mode="min", patience=3, factor=0.5, verbose=True)
+        scheduler = ReduceLROnPlateau(optimizer, mode="min", patience=3, factor=0.5)
 
     history = {
         "train_loss": [], "train_acc": [],
