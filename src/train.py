@@ -15,32 +15,39 @@ from tqdm import tqdm
 # ---------------------------------------------------------------------------
 # Entrenamiento de clasificadores
 # ---------------------------------------------------------------------------
-def train_one_epoch(model, loader, criterion, optimizer, device, is_hf_model=False):
+def train_one_epoch(model, loader, criterion, optimizer, device, is_hf_model=False, accumulation_steps=1):
     """Entrena una epoch de un modelo de clasificación."""
     model.train()
     running_loss = 0.0
     correct = 0
     total = 0
+    optimizer.zero_grad()
 
-    for images, labels in tqdm(loader, desc="Train", leave=False):
+    for step, (images, labels) in enumerate(tqdm(loader, desc="Train", leave=False)):
         images, labels = images.to(device), labels.to(device)
-        optimizer.zero_grad()
 
         if is_hf_model:
-            outputs = model(pixel_values=images, labels=labels)
-            loss = outputs.loss
+            outputs = model(pixel_values=images)
             logits = outputs.logits
         else:
             logits = model(images)
-            loss = criterion(logits, labels)
 
+        loss = criterion(logits, labels) / accumulation_steps
         loss.backward()
-        optimizer.step()
 
-        running_loss += loss.item() * images.size(0)
+        if (step + 1) % accumulation_steps == 0:
+            optimizer.step()
+            optimizer.zero_grad()
+
+        running_loss += loss.item() * accumulation_steps * images.size(0)
         _, preds = logits.max(1)
         correct += preds.eq(labels).sum().item()
         total += labels.size(0)
+
+    # Flush remaining gradients
+    if (step + 1) % accumulation_steps != 0:
+        optimizer.step()
+        optimizer.zero_grad()
 
     epoch_loss = running_loss / total
     epoch_acc = correct / total
@@ -61,13 +68,12 @@ def evaluate(model, loader, criterion, device, is_hf_model=False):
         images, labels = images.to(device), labels.to(device)
 
         if is_hf_model:
-            outputs = model(pixel_values=images, labels=labels)
-            loss = outputs.loss
+            outputs = model(pixel_values=images)
             logits = outputs.logits
         else:
             logits = model(images)
-            loss = criterion(logits, labels)
 
+        loss = criterion(logits, labels)
         running_loss += loss.item() * images.size(0)
         _, preds = logits.max(1)
         correct += preds.eq(labels).sum().item()
@@ -95,6 +101,7 @@ def train_classifier(
     patience: int = 7,
     scheduler_type: str = "plateau",
     is_hf_model: bool = False,
+    accumulation_steps: int = 1,
 ):
     """
     Loop completo de entrenamiento con early stopping.
@@ -138,7 +145,7 @@ def train_classifier(
 
         # Train
         train_loss, train_acc = train_one_epoch(
-            model, train_loader, criterion, optimizer, device, is_hf_model
+            model, train_loader, criterion, optimizer, device, is_hf_model, accumulation_steps
         )
 
         # Validate

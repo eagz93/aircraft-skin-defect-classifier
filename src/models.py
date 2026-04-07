@@ -154,6 +154,7 @@ def create_vit(
     num_classes: int = 5,
     model_name: str = "google/vit-base-patch16-224",
     freeze_backbone: bool = True,
+    gradient_checkpointing: bool = False,
 ):
     """
     Vision Transformer preentrenado desde Hugging Face.
@@ -165,6 +166,9 @@ def create_vit(
         num_labels=num_classes,
         ignore_mismatched_sizes=True,
     )
+
+    if gradient_checkpointing:
+        model.gradient_checkpointing_enable()
 
     if freeze_backbone:
         for name, param in model.named_parameters():
