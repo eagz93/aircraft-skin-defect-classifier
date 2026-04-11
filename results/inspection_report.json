@@ -1,0 +1,228 @@
+{
+  "summary": {
+    "inspection_date": "2026-04-09T22:17:47.089289",
+    "total_images": 15,
+    "correct": 15,
+    "accuracy": 1.0,
+    "needs_review": 0,
+    "defects_by_type": {
+      "crack": 3,
+      "missing_head": 3,
+      "dent": 3,
+      "scratch": 3,
+      "paint_off": 3
+    },
+    "defects_by_severity": {
+      "CRITICAL": 3,
+      "HIGH": 3,
+      "MEDIUM-HIGH": 3,
+      "MEDIUM": 3,
+      "LOW-MEDIUM": 3
+    },
+    "critical_findings": [
+      {
+        "file": "C:\\Maestria\\ML\\aircraft-skin-defect-classifier\\data\\processed\\crack\\crack_07259.jpg",
+        "defect": "crack",
+        "confidence": 0.9998483657836914,
+        "action": "Inspecci\u00f3n inmediata."
+      },
+      {
+        "file": "C:\\Maestria\\ML\\aircraft-skin-defect-classifier\\data\\processed\\crack\\crack_03476.jpg",
+        "defect": "crack",
+        "confidence": 0.9982684850692749,
+        "action": "Inspecci\u00f3n inmediata."
+      },
+      {
+        "file": "C:\\Maestria\\ML\\aircraft-skin-defect-classifier\\data\\processed\\crack\\crack_07340.jpg",
+        "defect": "crack",
+        "confidence": 0.9949081540107727,
+        "action": "Inspecci\u00f3n inmediata."
+      },
+      {
+        "file": "C:\\Maestria\\ML\\aircraft-skin-defect-classifier\\data\\processed\\missing_head\\missing_head_02998.jpg",
+        "defect": "missing_head",
+        "confidence": 0.9999955892562866,
+        "action": "Reemplazo de remache."
+      },
+      {
+        "file": "C:\\Maestria\\ML\\aircraft-skin-defect-classifier\\data\\processed\\missing_head\\missing_head_00114.jpg",
+        "defect": "missing_head",
+        "confidence": 0.9999903440475464,
+        "action": "Reemplazo de remache."
+      },
+      {
+        "file": "C:\\Maestria\\ML\\aircraft-skin-defect-classifier\\data\\processed\\missing_head\\missing_head_03336.jpg",
+        "defect": "missing_head",
+        "confidence": 0.9997307658195496,
+        "action": "Reemplazo de remache."
+      }
+    ]
+  },
+  "details": [
+    {
+      "image_path": "C:\\Maestria\\ML\\aircraft-skin-defect-classifier\\data\\processed\\crack\\crack_07259.jpg",
+      "true_label": "crack",
+      "prediction": "crack",
+      "confidence": 0.9998483657836914,
+      "severity": "CRITICAL",
+      "priority": 1,
+      "action": "Inspecci\u00f3n inmediata.",
+      "needs_review": false,
+      "correct": true
+    },
+    {
+      "image_path": "C:\\Maestria\\ML\\aircraft-skin-defect-classifier\\data\\processed\\crack\\crack_03476.jpg",
+      "true_label": "crack",
+      "prediction": "crack",
+      "confidence": 0.9982684850692749,
+      "severity": "CRITICAL",
+      "priority": 1,
+      "action": "Inspecci\u00f3n inmediata.",
+      "needs_review": false,
+      "correct": true
+    },
+    {
+      "image_path": "C:\\Maestria\\ML\\aircraft-skin-defect-classifier\\data\\processed\\crack\\crack_07340.jpg",
+      "true_label": "crack",
+      "prediction": "crack",
+      "confidence": 0.9949081540107727,
+      "severity": "CRITICAL",
+      "priority": 1,
+      "action": "Inspecci\u00f3n inmediata.",
+      "needs_review": false,
+      "correct": true
+    },
+    {
+      "image_path": "C:\\Maestria\\ML\\aircraft-skin-defect-classifier\\data\\processed\\missing_head\\missing_head_02998.jpg",
+      "true_label": "missing_head",
+      "prediction": "missing_head",
+      "confidence": 0.9999955892562866,
+      "severity": "HIGH",
+      "priority": 2,
+      "action": "Reemplazo de remache.",
+      "needs_review": false,
+      "correct": true
+    },
+    {
+      "image_path": "C:\\Maestria\\ML\\aircraft-skin-defect-classifier\\data\\processed\\missing_head\\missing_head_00114.jpg",
+      "true_label": "missing_head",
+      "prediction": "missing_head",
+      "confidence": 0.9999903440475464,
+      "severity": "HIGH",
+      "priority": 2,
+      "action": "Reemplazo de remache.",
+      "needs_review": false,
+      "correct": true
+    },
+    {
+      "image_path": "C:\\Maestria\\ML\\aircraft-skin-defect-classifier\\data\\processed\\missing_head\\missing_head_03336.jpg",
+      "true_label": "missing_head",
+      "prediction": "missing_head",
+      "confidence": 0.9997307658195496,
+      "severity": "HIGH",
+      "priority": 2,
+      "action": "Reemplazo de remache.",
+      "needs_review": false,
+      "correct": true
+    },
+    {
+      "image_path": "C:\\Maestria\\ML\\aircraft-skin-defect-classifier\\data\\processed\\dent\\dent_00652.jpg",
+      "true_label": "dent",
+      "prediction": "dent",
+      "confidence": 0.9999954700469971,
+      "severity": "MEDIUM-HIGH",
+      "priority": 3,
+      "action": "Medir profundidad.",
+      "needs_review": false,
+      "correct": true
+    },
+    {
+      "image_path": "C:\\Maestria\\ML\\aircraft-skin-defect-classifier\\data\\processed\\dent\\dent_04335.jpg",
+      "true_label": "dent",
+      "prediction": "dent",
+      "confidence": 0.9999703168869019,
+      "severity": "MEDIUM-HIGH",
+      "priority": 3,
+      "action": "Medir profundidad.",
+      "needs_review": false,
+      "correct": true
+    },
+    {
+      "image_path": "C:\\Maestria\\ML\\aircraft-skin-defect-classifier\\data\\processed\\dent\\dent_06331.jpg",
+      "true_label": "dent",
+      "prediction": "dent",
+      "confidence": 0.9217542409896851,
+      "severity": "MEDIUM-HIGH",
+      "priority": 3,
+      "action": "Medir profundidad.",
+      "needs_review": false,
+      "correct": true
+    },
+    {
+      "image_path": "C:\\Maestria\\ML\\aircraft-skin-defect-classifier\\data\\processed\\scratch\\scratch_00793.jpg",
+      "true_label": "scratch",
+      "prediction": "scratch",
+      "confidence": 0.9999924898147583,
+      "severity": "MEDIUM",
+      "priority": 4,
+      "action": "Verificar profundidad.",
+      "needs_review": false,
+      "correct": true
+    },
+    {
+      "image_path": "C:\\Maestria\\ML\\aircraft-skin-defect-classifier\\data\\processed\\scratch\\scratch_01296.jpg",
+      "true_label": "scratch",
+      "prediction": "scratch",
+      "confidence": 0.9999557733535767,
+      "severity": "MEDIUM",
+      "priority": 4,
+      "action": "Verificar profundidad.",
+      "needs_review": false,
+      "correct": true
+    },
+    {
+      "image_path": "C:\\Maestria\\ML\\aircraft-skin-defect-classifier\\data\\processed\\scratch\\scratch_00220.jpg",
+      "true_label": "scratch",
+      "prediction": "scratch",
+      "confidence": 0.6064889430999756,
+      "severity": "MEDIUM",
+      "priority": 4,
+      "action": "Verificar profundidad.",
+      "needs_review": false,
+      "correct": true
+    },
+    {
+      "image_path": "C:\\Maestria\\ML\\aircraft-skin-defect-classifier\\data\\processed\\paint_off\\paint_off_00717.jpg",
+      "true_label": "paint_off",
+      "prediction": "paint_off",
+      "confidence": 0.9999990463256836,
+      "severity": "LOW-MEDIUM",
+      "priority": 5,
+      "action": "Tratar anticorrosivo.",
+      "needs_review": false,
+      "correct": true
+    },
+    {
+      "image_path": "C:\\Maestria\\ML\\aircraft-skin-defect-classifier\\data\\processed\\paint_off\\paint_off_01620.jpg",
+      "true_label": "paint_off",
+      "prediction": "paint_off",
+      "confidence": 0.9999949932098389,
+      "severity": "LOW-MEDIUM",
+      "priority": 5,
+      "action": "Tratar anticorrosivo.",
+      "needs_review": false,
+      "correct": true
+    },
+    {
+      "image_path": "C:\\Maestria\\ML\\aircraft-skin-defect-classifier\\data\\processed\\paint_off\\paint_off_05788.jpg",
+      "true_label": "paint_off",
+      "prediction": "paint_off",
+      "confidence": 0.9998726844787598,
+      "severity": "LOW-MEDIUM",
+      "priority": 5,
+      "action": "Tratar anticorrosivo.",
+      "needs_review": false,
+      "correct": true
+    }
+  ]
+}

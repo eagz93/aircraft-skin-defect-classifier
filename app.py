@@ -34,8 +34,9 @@ CLASS_NAMES = ["crack", "dent", "missing_head", "paint_off", "scratch"]
 NUM_CLASSES = len(CLASS_NAMES)
 IMG_SIZE = 224
 
-MODEL_DIR = Path("results/models/deploy/vit_final")
-META_FILE = Path("results/models/deploy/deploy_meta.json")
+BASE_DIR = Path(__file__).resolve().parent
+MODEL_DIR = BASE_DIR / "results" / "models" / "deploy" / "vit_final"
+META_FILE = BASE_DIR / "results" / "models" / "deploy" / "deploy_meta.json"
 
 DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
 
@@ -213,7 +214,6 @@ def predict_defect(image):
 # ---------------------------------------------------------------------------
 with gr.Blocks(
     title="Aircraft Skin Defect Classifier",
-    theme=gr.themes.Soft(),
 ) as demo:
     gr.Markdown(
         """
@@ -274,4 +274,5 @@ if __name__ == "__main__":
         server_name="0.0.0.0",
         server_port=7860,
         share=False,
+        theme=gr.themes.Soft(),
     )

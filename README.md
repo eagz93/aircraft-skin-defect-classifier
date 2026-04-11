@@ -30,14 +30,12 @@ Etapa 5: LoRA + Deploy      → Fine-tuning eficiente + Gradio demo
 
 | Modelo | Accuracy | F1-Macro | Parámetros |
 |--------|----------|----------|------------|
-| MLP Base | — | — | — |
-| CNN Custom | — | — | — |
-| ResNet50 (fine-tuned) | — | — | — |
-| ViT-Base (fine-tuned) | — | — | — |
-| ViT + LoRA | — | — | — |
-| ViT + Synthetic Data | — | — | — |
-
-*(Se completará conforme avance el proyecto)*
+| MLP Base | 0.4797 | 0.4548 | 8.55M (100%) |
+| CNN Deep (6 bloques) | 0.8932 | 0.8942 | 4.33M (100%) |
+| ResNet50 (transfer) | 0.9469 | 0.9437 | 15.5M (64.5%) |
+| ViT-Base (transfer) | 0.9296 | 0.9307 | 14.2M (16.5%) |
+| **ViT + LoRA** | **0.9481** | **0.9511** | **298K (0.35%)** |
+| ViT + LoRA + Sintéticos | 0.9516 | — | 298K (0.35%) |
 
 ## Estructura del Proyecto
 
@@ -108,6 +106,14 @@ El demo permite:
 - Subir una imagen de superficie de aeronave
 - Ver la clasificación con probabilidades
 - Visualizar un mapa de calor Grad-CAM resaltando la zona del defecto
+
+Para documentación detallada de la app, ver **[docs/APP_USAGE.md](docs/APP_USAGE.md)**.
+
+### Prueba funcional
+```bash
+python test_app.py
+# Genera evidencia visual en results/app_test/
+```
 
 ## Demo en Línea
 

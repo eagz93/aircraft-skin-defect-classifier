@@ -34,6 +34,13 @@ python-dotenv>=1.0.0
 # Deployment
 gradio>=4.10.0
 
+# Object Detection (multi-defect)
+ultralytics>=8.0.0
+
+# ONNX export & inference
+onnx>=1.14.0
+onnxruntime>=1.16.0
+
 # Metrics
 torchmetrics>=1.2.0
 

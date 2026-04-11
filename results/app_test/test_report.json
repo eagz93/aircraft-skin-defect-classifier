@@ -1,0 +1,85 @@
+{
+  "test_date": "2026-04-09 22:10:00",
+  "device": "cuda",
+  "model_dir": "results\\models\\deploy\\vit_final",
+  "total_images": 5,
+  "correct": 5,
+  "accuracy": 1.0,
+  "results": [
+    {
+      "true_label": "crack",
+      "predicted": "crack",
+      "confidence": 0.9932,
+      "correct": true,
+      "latency_ms": 245.3,
+      "severity": "ALTA",
+      "all_probabilities": {
+        "crack": 0.9932,
+        "dent": 0.0003,
+        "missing_head": 0.0059,
+        "paint_off": 0.0,
+        "scratch": 0.0006
+      }
+    },
+    {
+      "true_label": "dent",
+      "predicted": "dent",
+      "confidence": 0.9603,
+      "correct": true,
+      "latency_ms": 34.5,
+      "severity": "MEDIA-ALTA",
+      "all_probabilities": {
+        "crack": 0.0385,
+        "dent": 0.9603,
+        "missing_head": 0.0007,
+        "paint_off": 0.0003,
+        "scratch": 0.0001
+      }
+    },
+    {
+      "true_label": "scratch",
+      "predicted": "scratch",
+      "confidence": 0.536,
+      "correct": true,
+      "latency_ms": 32.2,
+      "severity": "BAJA-MEDIA",
+      "all_probabilities": {
+        "crack": 0.0135,
+        "dent": 0.0024,
+        "missing_head": 0.0041,
+        "paint_off": 0.444,
+        "scratch": 0.536
+      }
+    },
+    {
+      "true_label": "missing_head",
+      "predicted": "missing_head",
+      "confidence": 0.9998,
+      "correct": true,
+      "latency_ms": 31.0,
+      "severity": "ALTA",
+      "all_probabilities": {
+        "crack": 0.0,
+        "dent": 0.0,
+        "missing_head": 0.9998,
+        "paint_off": 0.0002,
+        "scratch": 0.0
+      }
+    },
+    {
+      "true_label": "paint_off",
+      "predicted": "paint_off",
+      "confidence": 1.0,
+      "correct": true,
+      "latency_ms": 30.7,
+      "severity": "BAJA-MEDIA",
+      "all_probabilities": {
+        "crack": 0.0,
+        "dent": 0.0,
+        "missing_head": 0.0,
+        "paint_off": 1.0,
+        "scratch": 0.0
+      }
+    }
+  ]
+}
