@@ -1,228 +1,316 @@
 {
   "summary": {
-    "inspection_date": "2026-04-09T22:17:47.089289",
+    "inspection_date": "2026-04-10T22:36:45.176995",
     "total_images": 15,
-    "correct": 15,
-    "accuracy": 1.0,
-    "needs_review": 0,
+    "needs_manual_review": 0,
     "defects_by_type": {
       "crack": 3,
       "missing_head": 3,
-      "dent": 3,
-      "scratch": 3,
+      "dent": 4,
+      "scratch": 2,
       "paint_off": 3
     },
     "defects_by_severity": {
       "CRITICAL": 3,
       "HIGH": 3,
-      "MEDIUM-HIGH": 3,
-      "MEDIUM": 3,
+      "MEDIUM-HIGH": 4,
+      "MEDIUM": 2,
       "LOW-MEDIUM": 3
     },
     "critical_findings": [
       {
-        "file": "C:\\Maestria\\ML\\aircraft-skin-defect-classifier\\data\\processed\\crack\\crack_07259.jpg",
+        "file": "..\\data\\demo_inspection\\crack_07259.jpg",
         "defect": "crack",
-        "confidence": 0.9998483657836914,
-        "action": "Inspecci\u00f3n inmediata."
+        "confidence": 0.999974250793457,
+        "action": "Inspecci\u00f3n inmediata. Evaluar reparaci\u00f3n estructural."
       },
       {
-        "file": "C:\\Maestria\\ML\\aircraft-skin-defect-classifier\\data\\processed\\crack\\crack_03476.jpg",
+        "file": "..\\data\\demo_inspection\\crack_03476.jpg",
         "defect": "crack",
-        "confidence": 0.9982684850692749,
-        "action": "Inspecci\u00f3n inmediata."
+        "confidence": 0.9998794794082642,
+        "action": "Inspecci\u00f3n inmediata. Evaluar reparaci\u00f3n estructural."
       },
       {
-        "file": "C:\\Maestria\\ML\\aircraft-skin-defect-classifier\\data\\processed\\crack\\crack_07340.jpg",
+        "file": "..\\data\\demo_inspection\\crack_07340.jpg",
         "defect": "crack",
-        "confidence": 0.9949081540107727,
-        "action": "Inspecci\u00f3n inmediata."
+        "confidence": 0.9979113936424255,
+        "action": "Inspecci\u00f3n inmediata. Evaluar reparaci\u00f3n estructural."
       },
       {
-        "file": "C:\\Maestria\\ML\\aircraft-skin-defect-classifier\\data\\processed\\missing_head\\missing_head_02998.jpg",
+        "file": "..\\data\\demo_inspection\\missing_head_02998.jpg",
         "defect": "missing_head",
-        "confidence": 0.9999955892562866,
-        "action": "Reemplazo de remache."
+        "confidence": 0.9999970197677612,
+        "action": "Reemplazo de remache. Inspeccionar adyacentes."
       },
       {
-        "file": "C:\\Maestria\\ML\\aircraft-skin-defect-classifier\\data\\processed\\missing_head\\missing_head_00114.jpg",
+        "file": "..\\data\\demo_inspection\\missing_head_00114.jpg",
         "defect": "missing_head",
-        "confidence": 0.9999903440475464,
-        "action": "Reemplazo de remache."
+        "confidence": 0.9999191761016846,
+        "action": "Reemplazo de remache. Inspeccionar adyacentes."
       },
       {
-        "file": "C:\\Maestria\\ML\\aircraft-skin-defect-classifier\\data\\processed\\missing_head\\missing_head_03336.jpg",
+        "file": "..\\data\\demo_inspection\\missing_head_03336.jpg",
         "defect": "missing_head",
-        "confidence": 0.9997307658195496,
-        "action": "Reemplazo de remache."
+        "confidence": 0.9991118311882019,
+        "action": "Reemplazo de remache. Inspeccionar adyacentes."
       }
     ]
   },
   "details": [
     {
-      "image_path": "C:\\Maestria\\ML\\aircraft-skin-defect-classifier\\data\\processed\\crack\\crack_07259.jpg",
-      "true_label": "crack",
+      "image_path": "..\\data\\demo_inspection\\crack_07259.jpg",
       "prediction": "crack",
-      "confidence": 0.9998483657836914,
+      "confidence": 0.999974250793457,
+      "all_probabilities": {
+        "crack": 0.999974250793457,
+        "dent": 5.8239621125721897e-08,
+        "missing_head": 2.51629103331652e-07,
+        "paint_off": 2.5494196961517446e-05,
+        "scratch": 3.808408033378896e-10
+      },
       "severity": "CRITICAL",
       "priority": 1,
-      "action": "Inspecci\u00f3n inmediata.",
+      "action": "Inspecci\u00f3n inmediata. Evaluar reparaci\u00f3n estructural.",
       "needs_review": false,
-      "correct": true
+      "timestamp": "2026-04-10T22:36:43.592228"
     },
     {
-      "image_path": "C:\\Maestria\\ML\\aircraft-skin-defect-classifier\\data\\processed\\crack\\crack_03476.jpg",
-      "true_label": "crack",
+      "image_path": "..\\data\\demo_inspection\\crack_03476.jpg",
       "prediction": "crack",
-      "confidence": 0.9982684850692749,
+      "confidence": 0.9998794794082642,
+      "all_probabilities": {
+        "crack": 0.9998794794082642,
+        "dent": 7.605719474668149e-06,
+        "missing_head": 2.3841858265427618e-08,
+        "paint_off": 0.00011286450899206102,
+        "scratch": 1.3763859385562682e-08
+      },
       "severity": "CRITICAL",
       "priority": 1,
-      "action": "Inspecci\u00f3n inmediata.",
+      "action": "Inspecci\u00f3n inmediata. Evaluar reparaci\u00f3n estructural.",
       "needs_review": false,
-      "correct": true
+      "timestamp": "2026-04-10T22:36:43.466147"
     },
     {
-      "image_path": "C:\\Maestria\\ML\\aircraft-skin-defect-classifier\\data\\processed\\crack\\crack_07340.jpg",
-      "true_label": "crack",
+      "image_path": "..\\data\\demo_inspection\\crack_07340.jpg",
       "prediction": "crack",
-      "confidence": 0.9949081540107727,
+      "confidence": 0.9979113936424255,
+      "all_probabilities": {
+        "crack": 0.9979113936424255,
+        "dent": 6.275033229030669e-06,
+        "missing_head": 0.000221447175135836,
+        "paint_off": 0.0018604638753458858,
+        "scratch": 3.1429701152774214e-07
+      },
       "severity": "CRITICAL",
       "priority": 1,
-      "action": "Inspecci\u00f3n inmediata.",
+      "action": "Inspecci\u00f3n inmediata. Evaluar reparaci\u00f3n estructural.",
       "needs_review": false,
-      "correct": true
+      "timestamp": "2026-04-10T22:36:43.727630"
     },
     {
-      "image_path": "C:\\Maestria\\ML\\aircraft-skin-defect-classifier\\data\\processed\\missing_head\\missing_head_02998.jpg",
-      "true_label": "missing_head",
+      "image_path": "..\\data\\demo_inspection\\missing_head_02998.jpg",
       "prediction": "missing_head",
-      "confidence": 0.9999955892562866,
+      "confidence": 0.9999970197677612,
+      "all_probabilities": {
+        "crack": 2.345432903894107e-06,
+        "dent": 1.119392862847235e-07,
+        "missing_head": 0.9999970197677612,
+        "paint_off": 3.9413225749740377e-07,
+        "scratch": 1.1399892230201658e-07
+      },
       "severity": "HIGH",
       "priority": 2,
-      "action": "Reemplazo de remache.",
+      "action": "Reemplazo de remache. Inspeccionar adyacentes.",
       "needs_review": false,
-      "correct": true
+      "timestamp": "2026-04-10T22:36:44.345617"
     },
     {
-      "image_path": "C:\\Maestria\\ML\\aircraft-skin-defect-classifier\\data\\processed\\missing_head\\missing_head_00114.jpg",
-      "true_label": "missing_head",
+      "image_path": "..\\data\\demo_inspection\\missing_head_00114.jpg",
       "prediction": "missing_head",
-      "confidence": 0.9999903440475464,
+      "confidence": 0.9999191761016846,
+      "all_probabilities": {
+        "crack": 6.53525348752737e-05,
+        "dent": 1.0495909009478055e-05,
+        "missing_head": 0.9999191761016846,
+        "paint_off": 4.877724222751567e-06,
+        "scratch": 7.213284192175706e-08
+      },
       "severity": "HIGH",
       "priority": 2,
-      "action": "Reemplazo de remache.",
+      "action": "Reemplazo de remache. Inspeccionar adyacentes.",
       "needs_review": false,
-      "correct": true
+      "timestamp": "2026-04-10T22:36:44.221784"
     },
     {
-      "image_path": "C:\\Maestria\\ML\\aircraft-skin-defect-classifier\\data\\processed\\missing_head\\missing_head_03336.jpg",
-      "true_label": "missing_head",
+      "image_path": "..\\data\\demo_inspection\\missing_head_03336.jpg",
       "prediction": "missing_head",
-      "confidence": 0.9997307658195496,
+      "confidence": 0.9991118311882019,
+      "all_probabilities": {
+        "crack": 0.00031986518297344446,
+        "dent": 3.423723455853178e-07,
+        "missing_head": 0.9991118311882019,
+        "paint_off": 0.0005678471643477678,
+        "scratch": 8.945769458534869e-09
+      },
       "severity": "HIGH",
       "priority": 2,
-      "action": "Reemplazo de remache.",
+      "action": "Reemplazo de remache. Inspeccionar adyacentes.",
       "needs_review": false,
-      "correct": true
+      "timestamp": "2026-04-10T22:36:44.452363"
     },
     {
-      "image_path": "C:\\Maestria\\ML\\aircraft-skin-defect-classifier\\data\\processed\\dent\\dent_00652.jpg",
-      "true_label": "dent",
+      "image_path": "..\\data\\demo_inspection\\dent_00652.jpg",
       "prediction": "dent",
-      "confidence": 0.9999954700469971,
+      "confidence": 0.9999996423721313,
+      "all_probabilities": {
+        "crack": 3.349249482198502e-07,
+        "dent": 0.9999996423721313,
+        "missing_head": 1.551875072891562e-08,
+        "paint_off": 5.434376149082709e-08,
+        "scratch": 2.0692604962846417e-08
+      },
       "severity": "MEDIUM-HIGH",
       "priority": 3,
-      "action": "Medir profundidad.",
+      "action": "Medir profundidad/di\u00e1metro. Consultar SRM.",
       "needs_review": false,
-      "correct": true
+      "timestamp": "2026-04-10T22:36:43.860481"
     },
     {
-      "image_path": "C:\\Maestria\\ML\\aircraft-skin-defect-classifier\\data\\processed\\dent\\dent_04335.jpg",
-      "true_label": "dent",
+      "image_path": "..\\data\\demo_inspection\\dent_04335.jpg",
       "prediction": "dent",
-      "confidence": 0.9999703168869019,
+      "confidence": 0.9998480081558228,
+      "all_probabilities": {
+        "crack": 0.00013020381447859108,
+        "dent": 0.9998480081558228,
+        "missing_head": 5.07943582306325e-07,
+        "paint_off": 1.6878921087482013e-05,
+        "scratch": 4.342428837844636e-06
+      },
       "severity": "MEDIUM-HIGH",
       "priority": 3,
-      "action": "Medir profundidad.",
+      "action": "Medir profundidad/di\u00e1metro. Consultar SRM.",
       "needs_review": false,
-      "correct": true
+      "timestamp": "2026-04-10T22:36:43.976607"
     },
     {
-      "image_path": "C:\\Maestria\\ML\\aircraft-skin-defect-classifier\\data\\processed\\dent\\dent_06331.jpg",
-      "true_label": "dent",
+      "image_path": "..\\data\\demo_inspection\\dent_06331.jpg",
       "prediction": "dent",
-      "confidence": 0.9217542409896851,
+      "confidence": 0.703303337097168,
+      "all_probabilities": {
+        "crack": 0.001156081329099834,
+        "dent": 0.703303337097168,
+        "missing_head": 0.011096776463091373,
+        "paint_off": 0.2843850553035736,
+        "scratch": 5.868813968845643e-05
+      },
       "severity": "MEDIUM-HIGH",
       "priority": 3,
-      "action": "Medir profundidad.",
+      "action": "Medir profundidad/di\u00e1metro. Consultar SRM.",
       "needs_review": false,
-      "correct": true
+      "timestamp": "2026-04-10T22:36:44.093103"
     },
     {
-      "image_path": "C:\\Maestria\\ML\\aircraft-skin-defect-classifier\\data\\processed\\scratch\\scratch_00793.jpg",
-      "true_label": "scratch",
+      "image_path": "..\\data\\demo_inspection\\scratch_00220.jpg",
+      "prediction": "dent",
+      "confidence": 0.5948994755744934,
+      "all_probabilities": {
+        "crack": 0.03271033242344856,
+        "dent": 0.5948994755744934,
+        "missing_head": 0.029151687398552895,
+        "paint_off": 0.17636723816394806,
+        "scratch": 0.16687124967575073
+      },
+      "severity": "MEDIUM-HIGH",
+      "priority": 3,
+      "action": "Medir profundidad/di\u00e1metro. Consultar SRM.",
+      "needs_review": false,
+      "timestamp": "2026-04-10T22:36:44.927015"
+    },
+    {
+      "image_path": "..\\data\\demo_inspection\\scratch_00793.jpg",
       "prediction": "scratch",
-      "confidence": 0.9999924898147583,
+      "confidence": 0.9994651675224304,
+      "all_probabilities": {
+        "crack": 1.2601875823747832e-05,
+        "dent": 3.382834984222427e-05,
+        "missing_head": 2.8716758606606163e-05,
+        "paint_off": 0.00045962154399603605,
+        "scratch": 0.9994651675224304
+      },
       "severity": "MEDIUM",
       "priority": 4,
-      "action": "Verificar profundidad.",
+      "action": "Verificar profundidad. Re-tratamiento si necesario.",
       "needs_review": false,
-      "correct": true
+      "timestamp": "2026-04-10T22:36:45.051221"
     },
     {
-      "image_path": "C:\\Maestria\\ML\\aircraft-skin-defect-classifier\\data\\processed\\scratch\\scratch_01296.jpg",
-      "true_label": "scratch",
+      "image_path": "..\\data\\demo_inspection\\scratch_01296.jpg",
       "prediction": "scratch",
-      "confidence": 0.9999557733535767,
+      "confidence": 0.9990952014923096,
+      "all_probabilities": {
+        "crack": 0.0005779145867563784,
+        "dent": 2.814658955685445e-06,
+        "missing_head": 2.994528040289879e-05,
+        "paint_off": 0.0002941960992757231,
+        "scratch": 0.9990952014923096
+      },
       "severity": "MEDIUM",
       "priority": 4,
-      "action": "Verificar profundidad.",
+      "action": "Verificar profundidad. Re-tratamiento si necesario.",
       "needs_review": false,
-      "correct": true
+      "timestamp": "2026-04-10T22:36:45.176021"
     },
     {
-      "image_path": "C:\\Maestria\\ML\\aircraft-skin-defect-classifier\\data\\processed\\scratch\\scratch_00220.jpg",
-      "true_label": "scratch",
-      "prediction": "scratch",
-      "confidence": 0.6064889430999756,
-      "severity": "MEDIUM",
-      "priority": 4,
-      "action": "Verificar profundidad.",
-      "needs_review": false,
-      "correct": true
-    },
-    {
-      "image_path": "C:\\Maestria\\ML\\aircraft-skin-defect-classifier\\data\\processed\\paint_off\\paint_off_00717.jpg",
-      "true_label": "paint_off",
+      "image_path": "..\\data\\demo_inspection\\paint_off_01620.jpg",
       "prediction": "paint_off",
-      "confidence": 0.9999990463256836,
+      "confidence": 0.9999852180480957,
+      "all_probabilities": {
+        "crack": 1.3575247066910379e-05,
+        "dent": 5.931974556006026e-07,
+        "missing_head": 6.270213361858623e-07,
+        "paint_off": 0.9999852180480957,
+        "scratch": 5.398755220653584e-09
+      },
       "severity": "LOW-MEDIUM",
       "priority": 5,
-      "action": "Tratar anticorrosivo.",
+      "action": "Limpiar, tratar anticorrosivo, repintar.",
       "needs_review": false,
-      "correct": true
+      "timestamp": "2026-04-10T22:36:44.692643"
     },
     {
-      "image_path": "C:\\Maestria\\ML\\aircraft-skin-defect-classifier\\data\\processed\\paint_off\\paint_off_01620.jpg",
-      "true_label": "paint_off",
+      "image_path": "..\\data\\demo_inspection\\paint_off_00717.jpg",
       "prediction": "paint_off",
-      "confidence": 0.9999949932098389,
+      "confidence": 0.9998434782028198,
+      "all_probabilities": {
+        "crack": 1.637061615156199e-07,
+        "dent": 5.204610715736635e-07,
+        "missing_head": 9.503422916168347e-05,
+        "paint_off": 0.9998434782028198,
+        "scratch": 6.083611151552759e-05
+      },
       "severity": "LOW-MEDIUM",
       "priority": 5,
-      "action": "Tratar anticorrosivo.",
+      "action": "Limpiar, tratar anticorrosivo, repintar.",
       "needs_review": false,
-      "correct": true
+      "timestamp": "2026-04-10T22:36:44.575125"
     },
     {
-      "image_path": "C:\\Maestria\\ML\\aircraft-skin-defect-classifier\\data\\processed\\paint_off\\paint_off_05788.jpg",
-      "true_label": "paint_off",
+      "image_path": "..\\data\\demo_inspection\\paint_off_05788.jpg",
       "prediction": "paint_off",
-      "confidence": 0.9998726844787598,
+      "confidence": 0.9995613694190979,
+      "all_probabilities": {
+        "crack": 2.7557123758015223e-05,
+        "dent": 1.969508787169616e-07,
+        "missing_head": 0.0003503904736135155,
+        "paint_off": 0.9995613694190979,
+        "scratch": 6.0449154261732474e-05
+      },
       "severity": "LOW-MEDIUM",
       "priority": 5,
-      "action": "Tratar anticorrosivo.",
+      "action": "Limpiar, tratar anticorrosivo, repintar.",
       "needs_review": false,
-      "correct": true
+      "timestamp": "2026-04-10T22:36:44.810276"
     }
   ]
 }

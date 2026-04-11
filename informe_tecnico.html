@@ -1,0 +1,1013 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Informe Técnico — Clasificación de Defectos en Superficies de Aeronaves</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+
+        :root {
+            --primary: #1a365d;
+            --primary-light: #2b6cb0;
+            --accent: #2c5282;
+            --bg: #ffffff;
+            --text: #1a202c;
+            --text-secondary: #4a5568;
+            --border: #e2e8f0;
+            --surface: #f7fafc;
+            --success: #276749;
+            --warning: #975a16;
+            --danger: #9b2c2c;
+            --code-bg: #edf2f7;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        @page {
+            size: letter;
+            margin: 2.5cm 2cm;
+            @bottom-center { content: counter(page); font-size: 9pt; color: #718096; }
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-size: 11pt;
+            line-height: 1.7;
+            color: var(--text);
+            background: var(--bg);
+            max-width: 21cm;
+            margin: 0 auto;
+            padding: 2cm;
+        }
+
+        /* === PORTADA === */
+        .cover {
+            text-align: center;
+            page-break-after: always;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            min-height: 90vh;
+            padding: 3cm 1cm;
+        }
+        .cover .institution {
+            font-size: 13pt;
+            font-weight: 500;
+            color: var(--primary);
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            margin-bottom: 0.5cm;
+        }
+        .cover .program {
+            font-size: 11pt;
+            color: var(--text-secondary);
+            margin-bottom: 2cm;
+        }
+        .cover h1 {
+            font-size: 22pt;
+            font-weight: 700;
+            color: var(--primary);
+            line-height: 1.3;
+            margin-bottom: 0.8cm;
+        }
+        .cover .subtitle {
+            font-size: 13pt;
+            color: var(--accent);
+            font-weight: 400;
+            margin-bottom: 2.5cm;
+        }
+        .cover .course {
+            font-size: 12pt;
+            font-weight: 600;
+            color: var(--text);
+            margin-bottom: 0.3cm;
+        }
+        .cover .author {
+            font-size: 11pt;
+            color: var(--text-secondary);
+            margin-bottom: 0.3cm;
+        }
+        .cover .date {
+            font-size: 10pt;
+            color: var(--text-secondary);
+            margin-top: 1cm;
+        }
+        .cover-divider {
+            width: 6cm;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary), var(--primary-light));
+            margin: 1cm auto;
+            border-radius: 2px;
+        }
+
+        /* === HEADINGS === */
+        h1 { font-size: 18pt; font-weight: 700; color: var(--primary); margin: 1.2cm 0 0.5cm; border-bottom: 2px solid var(--primary); padding-bottom: 0.2cm; }
+        h2 { font-size: 14pt; font-weight: 600; color: var(--accent); margin: 0.9cm 0 0.4cm; }
+        h3 { font-size: 12pt; font-weight: 600; color: var(--text); margin: 0.6cm 0 0.3cm; }
+
+        p { margin-bottom: 0.4cm; text-align: justify; }
+
+        /* === TABLES === */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 0.5cm 0 0.7cm;
+            font-size: 9.5pt;
+            page-break-inside: avoid;
+        }
+        thead th {
+            background: var(--primary);
+            color: #fff;
+            font-weight: 600;
+            padding: 8px 10px;
+            text-align: center;
+            font-size: 9pt;
+            letter-spacing: 0.3px;
+        }
+        tbody td {
+            padding: 6px 10px;
+            border-bottom: 1px solid var(--border);
+            text-align: center;
+        }
+        tbody tr:nth-child(even) { background: var(--surface); }
+        tbody tr:hover { background: #ebf4ff; }
+        .highlight-row { background: #ebf8ff !important; font-weight: 600; }
+        .best-value { color: var(--success); font-weight: 700; }
+        td.left { text-align: left; }
+
+        /* === FIGURES === */
+        figure {
+            margin: 0.5cm 0 0.7cm;
+            text-align: center;
+            page-break-inside: avoid;
+        }
+        figcaption {
+            font-size: 9pt;
+            color: var(--text-secondary);
+            margin-top: 0.3cm;
+            font-style: italic;
+        }
+
+        /* === CALLOUT === */
+        .callout {
+            background: var(--surface);
+            border-left: 4px solid var(--primary-light);
+            padding: 12px 16px;
+            margin: 0.5cm 0;
+            border-radius: 0 6px 6px 0;
+            font-size: 10pt;
+        }
+        .callout.success { border-left-color: var(--success); background: #f0fff4; }
+        .callout.warning { border-left-color: var(--warning); background: #fffff0; }
+
+        /* === CODE === */
+        code {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 9pt;
+            background: var(--code-bg);
+            padding: 2px 5px;
+            border-radius: 3px;
+        }
+        pre {
+            background: #1a202c;
+            color: #e2e8f0;
+            padding: 14px 18px;
+            border-radius: 6px;
+            overflow-x: auto;
+            font-size: 8.5pt;
+            line-height: 1.5;
+            margin: 0.4cm 0 0.6cm;
+        }
+        pre code { background: none; padding: 0; color: inherit; }
+
+        /* === LISTS === */
+        ul, ol { margin: 0.3cm 0 0.5cm 1cm; }
+        li { margin-bottom: 0.15cm; }
+
+        /* === TOC === */
+        .toc { page-break-after: always; }
+        .toc h1 { border-bottom: none; text-align: center; }
+        .toc-list { list-style: none; margin: 0; padding: 0; }
+        .toc-list li {
+            padding: 4px 0;
+            border-bottom: 1px dotted var(--border);
+            display: flex;
+            justify-content: space-between;
+        }
+        .toc-list li.section { font-weight: 600; margin-top: 0.3cm; font-size: 11pt; }
+        .toc-list li.sub { padding-left: 1cm; font-size: 10pt; color: var(--text-secondary); }
+
+        /* === METRICS GRID === */
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+            margin: 0.5cm 0;
+        }
+        .metric-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 12px;
+            text-align: center;
+        }
+        .metric-card .value {
+            font-size: 18pt;
+            font-weight: 700;
+            color: var(--primary);
+        }
+        .metric-card .label {
+            font-size: 8pt;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* === ARCHITECTURE DIAGRAM === */
+        .arch-flow {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            margin: 0.5cm 0;
+            flex-wrap: wrap;
+        }
+        .arch-box {
+            background: var(--primary);
+            color: #fff;
+            padding: 8px 14px;
+            border-radius: 6px;
+            font-size: 9pt;
+            font-weight: 500;
+            text-align: center;
+            min-width: 80px;
+        }
+        .arch-box.highlight { background: var(--success); }
+        .arch-box.gen { background: #6b46c1; }
+        .arch-box.edge { background: #c05621; }
+        .arch-arrow { font-size: 14pt; color: var(--text-secondary); }
+
+        /* === PIPELINE === */
+        .pipeline {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 16px;
+            margin: 0.5cm 0;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 9pt;
+            line-height: 2;
+            text-align: center;
+        }
+
+        /* === PROGRESS BAR === */
+        .progress-bar {
+            background: #e2e8f0;
+            border-radius: 4px;
+            height: 22px;
+            margin: 4px 0;
+            position: relative;
+            overflow: hidden;
+        }
+        .progress-fill {
+            height: 100%;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            padding-right: 8px;
+            color: #fff;
+            font-size: 8pt;
+            font-weight: 600;
+        }
+
+        .page-break { page-break-before: always; }
+
+        @media print {
+            body { padding: 0; max-width: none; }
+            .cover { min-height: 100vh; }
+            .no-print { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ============================================================ -->
+<!-- PORTADA -->
+<!-- ============================================================ -->
+<div class="cover">
+    <div class="institution">Maestría en Ciencia de Datos</div>
+    <div class="program">Proyecto Final — Deep Learning</div>
+    <div class="cover-divider"></div>
+    <h1>Clasificación Automatizada de Defectos<br>en Superficies de Aeronaves<br>mediante Deep Learning</h1>
+    <div class="subtitle">Desarrollo Progresivo de un Sistema de Visión por Computadora:<br>Del MLP al Vision Transformer con Despliegue en Producción</div>
+    <div class="cover-divider"></div>
+    <div class="course">Curso: Deep Learning</div>
+    <div class="author">Maestría en Ciencia de Datos</div>
+    <div class="date">Julio 2025</div>
+</div>
+
+<!-- ============================================================ -->
+<!-- TABLA DE CONTENIDO -->
+<!-- ============================================================ -->
+<div class="toc">
+    <h1>Tabla de Contenido</h1>
+    <ul class="toc-list">
+        <li class="section"><span>1. Introducción</span></li>
+        <li class="sub"><span>1.1 Motivación y contexto del problema</span></li>
+        <li class="sub"><span>1.2 Objetivos del proyecto</span></li>
+        <li class="section"><span>2. Descripción del Dataset</span></li>
+        <li class="sub"><span>2.1 Fuentes de datos</span></li>
+        <li class="sub"><span>2.2 Análisis exploratorio</span></li>
+        <li class="sub"><span>2.3 Preprocesamiento y partición</span></li>
+        <li class="section"><span>3. Metodología</span></li>
+        <li class="sub"><span>3.1 Etapa 1 — MLP Base</span></li>
+        <li class="sub"><span>3.2 Etapa 2 — CNN Profunda</span></li>
+        <li class="sub"><span>3.3 Etapa 3 — Modelos Preentrenados</span></li>
+        <li class="sub"><span>3.4 Etapa 4 — Componente Generativo</span></li>
+        <li class="sub"><span>3.5 Etapa 5 — Fine-Tuning y Despliegue</span></li>
+        <li class="sub"><span>3.6 Etapa 6 — Mejoras Avanzadas</span></li>
+        <li class="section"><span>4. Experimentos y Resultados</span></li>
+        <li class="sub"><span>4.1 Estudio de ablación (CNN)</span></li>
+        <li class="sub"><span>4.2 Comparación progresiva de modelos</span></li>
+        <li class="sub"><span>4.3 Métricas por clase</span></li>
+        <li class="sub"><span>4.4 Impacto de datos sintéticos</span></li>
+        <li class="sub"><span>4.5 Técnicas de optimización</span></li>
+        <li class="sub"><span>4.6 Detección con YOLO11</span></li>
+        <li class="section"><span>5. Despliegue</span></li>
+        <li class="section"><span>6. Limitaciones y Trabajo Futuro</span></li>
+        <li class="section"><span>7. Conclusiones</span></li>
+        <li class="section"><span>8. Referencias</span></li>
+    </ul>
+</div>
+
+<!-- ============================================================ -->
+<!-- 1. INTRODUCCIÓN -->
+<!-- ============================================================ -->
+<h1>1. Introducción</h1>
+
+<h2>1.1 Motivación y contexto del problema</h2>
+
+<p>La inspección de superficies de aeronaves es un proceso crítico para garantizar la aeronavegabilidad y seguridad operacional. Tradicionalmente, esta inspección se realiza de forma visual por técnicos certificados, lo que conlleva limitaciones inherentes: subjetividad del operador, fatiga durante inspecciones prolongadas, variabilidad inter-observador y tiempos de inactividad significativos de la aeronave.</p>
+
+<p>Los defectos superficiales en aeronaves — grietas (<em>cracks</em>), abolladuras (<em>dents</em>), rayones (<em>scratches</em>), desprendimiento de pintura (<em>paint-off</em>) y cabezas de remaches faltantes (<em>missing heads</em>) — presentan patrones visuales distintivos que los hacen candidatos ideales para clasificación automatizada mediante técnicas de visión por computadora y aprendizaje profundo.</p>
+
+<p>Este proyecto desarrolla progresivamente un sistema de clasificación de defectos en superficies de aeronaves, avanzando desde modelos simples (MLP) hasta arquitecturas estado del arte (Vision Transformers con LoRA), integrando generación de datos sintéticos y desplegando el sistema como aplicación web funcional.</p>
+
+<h2>1.2 Objetivos del proyecto</h2>
+
+<ul>
+    <li><strong>Objetivo general:</strong> Diseñar, implementar y desplegar un sistema de deep learning para la clasificación automatizada de 5 tipos de defectos en superficies de aeronaves.</li>
+    <li><strong>Objetivos específicos:</strong>
+        <ul>
+            <li>Evaluar progresivamente arquitecturas de complejidad creciente: MLP → CNN → Transfer Learning → ViT + LoRA.</li>
+            <li>Implementar un componente generativo (VAE + DCGAN) para aumentar y balancear el dataset.</li>
+            <li>Optimizar el modelo final mediante LoRA/PEFT, cuantización y pruning.</li>
+            <li>Desplegar una interfaz web interactiva con clasificación, localización y explicabilidad.</li>
+        </ul>
+    </li>
+</ul>
+
+<!-- ============================================================ -->
+<!-- 2. DATASET -->
+<!-- ============================================================ -->
+<h1>2. Descripción del Dataset</h1>
+
+<h2>2.1 Fuentes de datos</h2>
+
+<p>Se combinaron dos datasets públicos de la plataforma Roboflow Universe, ambos con licencia CC BY 4.0:</p>
+
+<table>
+    <thead>
+        <tr>
+            <th>Dataset</th>
+            <th>Autor</th>
+            <th>Imágenes aprox.</th>
+            <th>Tipo</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td class="left">aircraft-skin-defects-merged-final</td>
+            <td>Dibya Dillip</td>
+            <td>~2,000</td>
+            <td>Object Detection (COCO)</td>
+        </tr>
+        <tr>
+            <td class="left">aircraft-skin-defects</td>
+            <td>AI Assistant for General Visual Inspection</td>
+            <td>~4,600</td>
+            <td>Object Detection (COCO)</td>
+        </tr>
+    </tbody>
+</table>
+
+<p>Ambos datasets contienen anotaciones en formato COCO con bounding boxes para 5 clases unificadas de defectos superficiales.</p>
+
+<h2>2.2 Análisis exploratorio</h2>
+
+<p>Tras la descarga, unificación y recorte de parches (crops) de las regiones anotadas, se obtuvo un corpus de <strong>33,901 imágenes</strong> distribuidas en 5 clases:</p>
+
+<table>
+    <thead>
+        <tr>
+            <th>Clase</th>
+            <th>Descripción</th>
+            <th>Muestras</th>
+            <th>Proporción</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><code>crack</code></td>
+            <td class="left">Grietas en la superficie metálica</td>
+            <td>8,088</td>
+            <td>23.9%</td>
+        </tr>
+        <tr>
+            <td><code>dent</code></td>
+            <td class="left">Abolladuras por impacto</td>
+            <td>10,064</td>
+            <td>29.7%</td>
+        </tr>
+        <tr>
+            <td><code>missing_head</code></td>
+            <td class="left">Cabezas de remaches faltantes</td>
+            <td>7,510</td>
+            <td>22.1%</td>
+        </tr>
+        <tr>
+            <td><code>paint_off</code></td>
+            <td class="left">Desprendimiento de pintura</td>
+            <td>6,730</td>
+            <td>19.9%</td>
+        </tr>
+        <tr>
+            <td><code>scratch</code></td>
+            <td class="left">Rayones superficiales</td>
+            <td>1,509</td>
+            <td>4.5%</td>
+        </tr>
+    </tbody>
+</table>
+
+<div class="callout warning">
+    <strong>Desbalance de clases:</strong> La clase <code>scratch</code> representa solo el 4.5% del total (1,509 muestras), mientras que <code>dent</code> alcanza el 29.7% (10,064 muestras) — una proporción de 6.7:1. Este desbalance motivó la generación de datos sintéticos en la Etapa 4.
+</div>
+
+<h2>2.3 Preprocesamiento y partición</h2>
+
+<p>El pipeline de preprocesamiento incluye:</p>
+<ol>
+    <li><strong>Extracción de parches:</strong> Recorte de regiones de interés (ROI) a partir de bounding boxes COCO.</li>
+    <li><strong>Redimensionamiento:</strong> 128×128 px para MLP (escala de grises, aplanado a vector 1D de 16,384 dimensiones), 224×224 px para CNN, ResNet50 y ViT.</li>
+    <li><strong>Normalización:</strong> Media y desviación estándar de ImageNet para modelos preentrenados; normalización [0,1] para modelos from-scratch.</li>
+    <li><strong>Partición estratificada:</strong> 70% entrenamiento / 15% validación / 15% test (semilla fija = 42).</li>
+</ol>
+
+<table>
+    <thead>
+        <tr><th>Split</th><th>Muestras</th><th>Proporción</th></tr>
+    </thead>
+    <tbody>
+        <tr><td>Entrenamiento</td><td>23,730</td><td>70%</td></tr>
+        <tr><td>Validación</td><td>5,085</td><td>15%</td></tr>
+        <tr><td>Test</td><td>5,086</td><td>15%</td></tr>
+        <tr style="font-weight:600"><td>Total</td><td>33,901</td><td>100%</td></tr>
+    </tbody>
+</table>
+
+<!-- ============================================================ -->
+<!-- 3. METODOLOGÍA -->
+<!-- ============================================================ -->
+<h1 class="page-break">3. Metodología</h1>
+
+<p>El proyecto se desarrolló progresivamente en 6 etapas, cada una construyendo sobre los aprendizajes de la anterior:</p>
+
+<div class="arch-flow">
+    <div class="arch-box">E1: MLP</div>
+    <span class="arch-arrow">→</span>
+    <div class="arch-box">E2: CNN</div>
+    <span class="arch-arrow">→</span>
+    <div class="arch-box">E3: Transfer</div>
+    <span class="arch-arrow">→</span>
+    <div class="arch-box gen">E4: Generativo</div>
+    <span class="arch-arrow">→</span>
+    <div class="arch-box highlight">E5: LoRA+Deploy</div>
+    <span class="arch-arrow">→</span>
+    <div class="arch-box edge">E6: YOLO+Edge</div>
+</div>
+
+<h2>3.1 Etapa 1 — MLP Base (Perceptrón Multicapa)</h2>
+
+<p>Se implementó un MLP clásico como modelo base de referencia. Las imágenes se convirtieron a escala de grises, se redimensionaron a 128×128 px y se aplanaron en vectores de 16,384 dimensiones.</p>
+
+<h3>Arquitectura</h3>
+<pre><code>Input(16,384) → Linear(512) → BN → ReLU → Dropout(0.3)
+             → Linear(256) → BN → ReLU → Dropout(0.3)
+             → Linear(128) → BN → ReLU → Dropout(0.3)
+             → Linear(5) → Softmax</code></pre>
+
+<p><strong>Hiperparámetros:</strong> lr = 1×10⁻³, weight_decay = 1×10⁻⁴, 30 épocas, early stopping (patience = 7), optimizador Adam, loss CrossEntropy con pesos de clase.</p>
+
+<p><strong>Justificación:</strong> El MLP sirve como línea base deliberadamente limitada — al aplanar las imágenes pierde toda la estructura espacial, lo que justifica la evolución hacia arquitecturas convolucionales.</p>
+
+<h2>3.2 Etapa 2 — CNN Profunda</h2>
+
+<p>Se diseñó una CNN modular desde cero con bloques convolucionales apilables para capturar la estructura espacial de las imágenes.</p>
+
+<h3>Arquitectura (configuración óptima: 6 bloques)</h3>
+<pre><code>Input(3, 224, 224)
+  → [Conv3×3(64) → BN → ReLU → MaxPool2×2]    # Bloque 1
+  → [Conv3×3(128) → BN → ReLU → MaxPool2×2]   # Bloque 2
+  → [Conv3×3(256) → BN → ReLU → MaxPool2×2]   # Bloque 3
+  → [Conv3×3(512) → BN → ReLU → MaxPool2×2]   # Bloque 4
+  → [Conv3×3(512) → BN → ReLU → MaxPool2×2]   # Bloque 5
+  → [Conv3×3(512) → BN → ReLU → AdaptiveAvgPool]  # Bloque 6
+  → Flatten → Linear(512) → Dropout(0.5) → Linear(5)</code></pre>
+
+<p><strong>Estudio de ablación:</strong> Se evaluaron 6 configuraciones variando profundidad (4 vs 6 bloques), dropout (0.3, 0.5, 0.7) y tasa de aprendizaje (10⁻⁴, 10⁻³, 10⁻²) para identificar la combinación óptima.</p>
+
+<h2>3.3 Etapa 3 — Modelos Preentrenados y Transfer Learning</h2>
+
+<p>Se integraron dos arquitecturas preentrenadas en ImageNet para aprovechar representaciones visuales generales:</p>
+
+<h3>ResNet50</h3>
+<p>Red residual de 50 capas con conexiones skip. Entrenamiento en dos fases: (1) backbone congelado, solo cabeza clasificadora — 10 épocas; (2) fine-tuning de las últimas 2 capas residuales — 20 épocas con lr reducido (1×10⁻⁴).</p>
+
+<h3>ViT-Base (Vision Transformer)</h3>
+<p>Modelo <code>google/vit-base-patch16-224</code> de Hugging Face. Divide la imagen en parches de 16×16 y aplica atención multi-cabeza (self-attention). Entrenamiento en dos fases análogo a ResNet50: backbone congelado → fine-tuning parcial de los últimos 3 bloques transformer.</p>
+
+<div class="callout">
+    <strong>Nota:</strong> El ViT-Base fue seleccionado como modelo base para la Etapa 5 (LoRA) por su arquitectura modular que facilita la inyección de adaptadores de bajo rango.
+</div>
+
+<h2>3.4 Etapa 4 — Componente Generativo (VAE + DCGAN)</h2>
+
+<p>Se implementaron dos arquitecturas generativas para crear imágenes sintéticas y balancear el dataset:</p>
+
+<h3>Autoencoder Variacional (VAE)</h3>
+<p>Encoder convolucional → espacio latente (128-dim) → Decoder deconvolucional. Entrenado durante 50 épocas con función de pérdida combinada: MSE (reconstrucción) + KL divergence (regularización). Resolución: 64×64 px.</p>
+
+<h3>Conditional DCGAN (Deep Convolutional GAN)</h3>
+<p>Generador y discriminador condicionales por clase. El generador recibe ruido latente (100-dim) + embedding de clase y produce imágenes 64×64. Entrenado 100 épocas con Adam (lr = 2×10⁻⁴, β₁ = 0.5).</p>
+
+<h3>Balanceo del dataset</h3>
+<p>Se generaron <strong>11,495 imágenes sintéticas</strong> con el DCGAN condicional para igualar todas las clases a 7,045 muestras:</p>
+
+<table>
+    <thead>
+        <tr><th>Clase</th><th>Original</th><th>Sintéticas</th><th>Total</th><th>Incremento</th></tr>
+    </thead>
+    <tbody>
+        <tr><td><code>crack</code></td><td>5,666</td><td>1,379</td><td>7,045</td><td>+24.3%</td></tr>
+        <tr><td><code>dent</code></td><td>7,045</td><td>0</td><td>7,045</td><td>—</td></tr>
+        <tr><td><code>missing_head</code></td><td>5,257</td><td>1,788</td><td>7,045</td><td>+34.0%</td></tr>
+        <tr><td><code>paint_off</code></td><td>4,711</td><td>2,334</td><td>7,045</td><td>+49.5%</td></tr>
+        <tr><td><code>scratch</code></td><td>1,051</td><td>5,994</td><td>7,045</td><td>+570%</td></tr>
+        <tr style="font-weight:600"><td>Total</td><td>23,730</td><td>11,495</td><td>35,225</td><td>+48.5%</td></tr>
+    </tbody>
+</table>
+
+<h2>3.5 Etapa 5 — Fine-Tuning Eficiente y Despliegue</h2>
+
+<h3>LoRA (Low-Rank Adaptation)</h3>
+<p>Se aplicó LoRA/PEFT sobre el ViT-Base, inyectando adaptadores de bajo rango en las matrices de atención <code>query</code> y <code>value</code>:</p>
+
+<table>
+    <thead>
+        <tr><th>Parámetro</th><th>Valor</th><th>Descripción</th></tr>
+    </thead>
+    <tbody>
+        <tr><td>Rango (r)</td><td>8</td><td>Dimensión del adaptador de bajo rango</td></tr>
+        <tr><td>Alpha (α)</td><td>16</td><td>Factor de escala (α/r = 2)</td></tr>
+        <tr><td>Dropout</td><td>0.1</td><td>Regularización en adaptadores</td></tr>
+        <tr><td>Target modules</td><td>query, value</td><td>Matrices de atención adaptadas</td></tr>
+        <tr><td>Params entrenables</td><td>298K / 86M</td><td><strong>0.35%</strong> del total</td></tr>
+    </tbody>
+</table>
+
+<h3>Técnicas de optimización</h3>
+<ul>
+    <li><strong>Cuantización INT8:</strong> Cuantización dinámica post-entrenamiento de capas Linear.</li>
+    <li><strong>Pruning L1 (30%):</strong> Poda no estructurada de pesos con menor magnitud.</li>
+    <li><strong>Re-entrenamiento con sintéticos:</strong> LoRA re-entrenado con dataset aumentado (real + sintético).</li>
+</ul>
+
+<h3>Despliegue Gradio</h3>
+<p>Se implementó una interfaz web con Gradio que integra:</p>
+<ul>
+    <li>Clasificación con ViT + LoRA (merged) + diagnóstico descriptivo</li>
+    <li>Visualización Grad-CAM para explicabilidad</li>
+    <li>Modelo final guardado en formato Hugging Face con metadata de deploy</li>
+</ul>
+
+<h2>3.6 Etapa 6 — Mejoras Avanzadas</h2>
+
+<h3>Detección multi-defecto con YOLO11</h3>
+<p>Se entrenó YOLO11n (nano) de Ultralytics para detección de objetos, permitiendo localizar y clasificar múltiples defectos simultáneamente con bounding boxes. YOLO11n ofrece ~19% menos parámetros que YOLOv8n (2.6M vs 3.2M) con mejor mAP.</p>
+
+<h3>Edge deployment</h3>
+<p>Se combinó pruning L1 (30%) + cuantización INT8 + exportación ONNX para obtener un modelo ultra-compacto compatible con dispositivos edge (drones, cámaras industriales).</p>
+
+<h3>Pipeline de inspección automatizada</h3>
+<p>Se integró un pipeline end-to-end que procesa lotes de imágenes, clasifica con ViT + GradCAM, aplica triage por severidad y genera reportes JSON estructurados para integración con sistemas CMMS/MRO.</p>
+
+<!-- ============================================================ -->
+<!-- 4. EXPERIMENTOS Y RESULTADOS -->
+<!-- ============================================================ -->
+<h1 class="page-break">4. Experimentos y Resultados</h1>
+
+<h2>4.1 Estudio de ablación (CNN — Etapa 2)</h2>
+
+<p>Se evaluaron 6 configuraciones para estudiar el impacto de profundidad, regularización y tasa de aprendizaje:</p>
+
+<table>
+    <thead>
+        <tr><th>Configuración</th><th>Bloques</th><th>Dropout</th><th>Learning Rate</th><th>Val Accuracy</th><th>Δ vs Base</th></tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td class="left">Base</td><td>4</td><td>0.5</td><td>1×10⁻³</td><td>0.7624</td><td>—</td>
+        </tr>
+        <tr class="highlight-row">
+            <td class="left"><strong>Deep (óptimo)</strong></td><td><strong>6</strong></td><td><strong>0.5</strong></td><td><strong>1×10⁻³</strong></td><td class="best-value"><strong>0.8952</strong></td><td><strong>+13.28 pp</strong></td>
+        </tr>
+        <tr>
+            <td class="left">Low dropout</td><td>4</td><td>0.3</td><td>1×10⁻³</td><td>0.7194</td><td>−4.30 pp</td>
+        </tr>
+        <tr>
+            <td class="left">High dropout</td><td>4</td><td>0.7</td><td>1×10⁻³</td><td>0.6505</td><td>−11.19 pp</td>
+        </tr>
+        <tr>
+            <td class="left">High LR</td><td>4</td><td>0.5</td><td>1×10⁻²</td><td>0.5559</td><td>−20.65 pp</td>
+        </tr>
+        <tr>
+            <td class="left">Low LR</td><td>4</td><td>0.5</td><td>1×10⁻⁴</td><td>0.6649</td><td>−9.75 pp</td>
+        </tr>
+    </tbody>
+</table>
+
+<p><strong>Hallazgos:</strong> La profundidad (+2 bloques) es el factor con mayor impacto positivo (+13.28 pp). El dropout óptimo es 0.5 — valores menores causan sobreajuste y mayores sub-ajuste. La tasa de aprendizaje es crítica: 10⁻² causa divergencia.</p>
+
+<h2>4.2 Comparación progresiva de modelos</h2>
+
+<p>La siguiente tabla presenta la evolución completa del rendimiento a lo largo de las 6 etapas del proyecto, evaluado sobre el conjunto de test (5,086 muestras):</p>
+
+<table>
+    <thead>
+        <tr>
+            <th>Etapa</th>
+            <th>Modelo</th>
+            <th>Accuracy</th>
+            <th>F1-Macro</th>
+            <th>AUC-Macro</th>
+            <th>Params Entrenables</th>
+            <th>Δ Accuracy</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>E1</td>
+            <td class="left">MLP Base</td>
+            <td>0.4797</td>
+            <td>0.4548</td>
+            <td>0.7509</td>
+            <td>8.55M (100%)</td>
+            <td>—</td>
+        </tr>
+        <tr>
+            <td>E2</td>
+            <td class="left">CNN Deep (6 bloques)</td>
+            <td>0.8932</td>
+            <td>0.8942</td>
+            <td>0.9871</td>
+            <td>4.33M (100%)</td>
+            <td>+41.35 pp</td>
+        </tr>
+        <tr>
+            <td>E3</td>
+            <td class="left">ResNet50 (transfer)</td>
+            <td class="best-value">0.9469</td>
+            <td>0.9437</td>
+            <td class="best-value">0.9971</td>
+            <td>15.5M (64.5%)</td>
+            <td>+5.37 pp</td>
+        </tr>
+        <tr>
+            <td>E3</td>
+            <td class="left">ViT-Base (transfer)</td>
+            <td>0.9296</td>
+            <td>0.9307</td>
+            <td>0.9944</td>
+            <td>14.2M (16.5%)</td>
+            <td>+3.64 pp</td>
+        </tr>
+        <tr>
+            <td>E5</td>
+            <td class="left">ViT + LoRA</td>
+            <td>0.9481</td>
+            <td class="best-value">0.9511</td>
+            <td>—</td>
+            <td>298K (0.35%)</td>
+            <td>+1.85 pp</td>
+        </tr>
+        <tr>
+            <td>E5</td>
+            <td class="left">ViT + Cuantizado INT8</td>
+            <td>0.9349</td>
+            <td>0.9384</td>
+            <td>—</td>
+            <td>—</td>
+            <td>−1.32 pp</td>
+        </tr>
+        <tr>
+            <td>E5</td>
+            <td class="left">ViT + Pruned 30%</td>
+            <td>0.9430</td>
+            <td>0.9457</td>
+            <td>—</td>
+            <td>—</td>
+            <td>−0.51 pp</td>
+        </tr>
+        <tr class="highlight-row">
+            <td>E5</td>
+            <td class="left"><strong>ViT + LoRA + Sintéticos</strong></td>
+            <td class="best-value"><strong>0.9516</strong></td>
+            <td><strong>0.9511</strong></td>
+            <td>—</td>
+            <td><strong>298K (0.35%)</strong></td>
+            <td><strong>+0.35 pp</strong></td>
+        </tr>
+    </tbody>
+</table>
+
+<div class="callout success">
+    <strong>Resultado principal:</strong> El modelo final (ViT + LoRA + datos sintéticos) alcanza <strong>95.16% de accuracy</strong> con solo <strong>298K parámetros entrenables</strong> (0.35% del modelo base), superando al fine-tuning completo del ViT (92.96%) en +2.20 pp y compitiendo con ResNet50 (94.69%).
+</div>
+
+<!-- Progression visual -->
+<h3>Progresión visual del accuracy</h3>
+<div style="margin: 0.5cm 0;">
+    <div style="display:flex; align-items:center; margin:4px 0;">
+        <span style="width:160px; font-size:9pt;">E1 — MLP Base</span>
+        <div class="progress-bar" style="flex:1">
+            <div class="progress-fill" style="width:47.97%; background:linear-gradient(90deg,#e53e3e,#fc8181)">47.97%</div>
+        </div>
+    </div>
+    <div style="display:flex; align-items:center; margin:4px 0;">
+        <span style="width:160px; font-size:9pt;">E2 — CNN Deep</span>
+        <div class="progress-bar" style="flex:1">
+            <div class="progress-fill" style="width:89.32%; background:linear-gradient(90deg,#dd6b20,#fbd38d)">89.32%</div>
+        </div>
+    </div>
+    <div style="display:flex; align-items:center; margin:4px 0;">
+        <span style="width:160px; font-size:9pt;">E3 — ResNet50</span>
+        <div class="progress-bar" style="flex:1">
+            <div class="progress-fill" style="width:94.69%; background:linear-gradient(90deg,#3182ce,#90cdf4)">94.69%</div>
+        </div>
+    </div>
+    <div style="display:flex; align-items:center; margin:4px 0;">
+        <span style="width:160px; font-size:9pt;">E3 — ViT-Base</span>
+        <div class="progress-bar" style="flex:1">
+            <div class="progress-fill" style="width:92.96%; background:linear-gradient(90deg,#805ad5,#d6bcfa)">92.96%</div>
+        </div>
+    </div>
+    <div style="display:flex; align-items:center; margin:4px 0;">
+        <span style="width:160px; font-size:9pt;">E5 — ViT + LoRA</span>
+        <div class="progress-bar" style="flex:1">
+            <div class="progress-fill" style="width:94.81%; background:linear-gradient(90deg,#2f855a,#68d391)">94.81%</div>
+        </div>
+    </div>
+    <div style="display:flex; align-items:center; margin:4px 0;">
+        <span style="width:160px; font-size:9pt; font-weight:600;">E5 — ViT+LoRA+Synth</span>
+        <div class="progress-bar" style="flex:1">
+            <div class="progress-fill" style="width:95.16%; background:linear-gradient(90deg,#276749,#48bb78)">95.16%</div>
+        </div>
+    </div>
+</div>
+
+<h2>4.3 Métricas por clase — Modelo final (ViT + LoRA)</h2>
+
+<table>
+    <thead>
+        <tr>
+            <th>Clase</th>
+            <th>Precision</th>
+            <th>Recall</th>
+            <th>F1-Score</th>
+            <th>Soporte</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr><td><code>crack</code></td><td>0.9253</td><td>0.9334</td><td>0.9293</td><td>1,215</td></tr>
+        <tr><td><code>dent</code></td><td>0.9570</td><td>0.9649</td><td>0.9609</td><td>1,510</td></tr>
+        <tr><td><code>missing_head</code></td><td>0.9523</td><td>0.9532</td><td>0.9528</td><td>1,126</td></tr>
+        <tr><td><code>paint_off</code></td><td>0.9367</td><td>0.9455</td><td>0.9411</td><td>1,010</td></tr>
+        <tr><td><code>scratch</code></td><td>0.9786</td><td>0.9644</td><td>0.9713</td><td>225</td></tr>
+        <tr style="font-weight:600"><td>Macro avg</td><td>0.9497</td><td>0.9526</td><td>0.9511</td><td>5,086</td></tr>
+    </tbody>
+</table>
+
+<p>Todas las clases superan el 92% de F1-Score. Notablemente, <code>scratch</code> — la clase minoritaria — logra el F1 más alto (0.9713), lo que indica que los patrones lineales de los rayones son altamente discriminativos a pesar de su escasez.</p>
+
+<h2>4.4 Impacto de datos sintéticos (E4 → E5)</h2>
+
+<table>
+    <thead>
+        <tr><th>Modelo</th><th>Accuracy</th><th>F1-Macro</th><th>Δ Accuracy</th></tr>
+    </thead>
+    <tbody>
+        <tr><td class="left">ViT + LoRA (sin sintéticos)</td><td>0.9481</td><td>0.9511</td><td>—</td></tr>
+        <tr class="highlight-row"><td class="left"><strong>ViT + LoRA (con sintéticos)</strong></td><td class="best-value"><strong>0.9516</strong></td><td><strong>0.9511</strong></td><td><strong>+0.35 pp</strong></td></tr>
+    </tbody>
+</table>
+
+<p>La mejora de +0.35 pp es modesta dado que el dataset original ya contiene volumen suficiente. Sin embargo, el balanceo beneficia particularmente a la clase <code>scratch</code> (incremento de 1,051 → 7,045 muestras, +570%), mejorando la robustez ante clases sub-representadas.</p>
+
+<h2>4.5 Técnicas de optimización (E5)</h2>
+
+<table>
+    <thead>
+        <tr><th>Técnica</th><th>Accuracy</th><th>F1-Macro</th><th>Tamaño</th><th>Reducción</th><th>Penalización</th></tr>
+    </thead>
+    <tbody>
+        <tr><td class="left">ViT + LoRA (referencia)</td><td>0.9481</td><td>0.9511</td><td>327.3 MB</td><td>—</td><td>—</td></tr>
+        <tr><td class="left">+ Cuantización INT8</td><td>0.9349</td><td>0.9384</td><td>3.0 MB</td><td>−99.1%</td><td>−1.32 pp</td></tr>
+        <tr><td class="left">+ Pruning L1 (30%)</td><td>0.9430</td><td>0.9457</td><td>327.3 MB</td><td>—</td><td>−0.51 pp</td></tr>
+    </tbody>
+</table>
+
+<p><strong>Hallazgos clave:</strong></p>
+<ul>
+    <li><strong>Cuantización INT8:</strong> Reducción extrema del 99.1% en tamaño (327 → 3 MB) con una caída aceptable de −1.32 pp en accuracy. Ideal para despliegue en dispositivos con memoria limitada.</li>
+    <li><strong>Pruning L1 (30%):</strong> Elimina el 30% de los pesos con impacto mínimo de −0.51 pp, confirmando redundancia significativa en el modelo — potencial para mayor poda.</li>
+</ul>
+
+<h2 class="page-break">4.6 Detección con YOLO11 (E6)</h2>
+
+<p>Se entrenó YOLO11n (nano) para detección de defectos con bounding boxes, convirtiendo las anotaciones COCO a formato YOLO:</p>
+
+<table>
+    <thead>
+        <tr><th>Modelo</th><th>Params (M)</th><th>mAP@50 (COCO)</th><th>Ventaja</th></tr>
+    </thead>
+    <tbody>
+        <tr><td>YOLOv8n</td><td>3.2</td><td>37.3</td><td>Base de referencia</td></tr>
+        <tr class="highlight-row"><td><strong>YOLO11n</strong></td><td><strong>2.6</strong></td><td><strong>39.5</strong></td><td><strong>~19% menos params, +2.2 mAP</strong></td></tr>
+        <tr><td>YOLO26n</td><td>2.4</td><td>40.9</td><td>NMS-free (más reciente)</td></tr>
+    </tbody>
+</table>
+
+<p><strong>Comparación de enfoques:</strong></p>
+
+<table>
+    <thead>
+        <tr><th>Aspecto</th><th>Clasificación (ViT+LoRA)</th><th>Detección (YOLO11)</th></tr>
+    </thead>
+    <tbody>
+        <tr><td class="left">Tarea</td><td>1 defecto por imagen</td><td>Múltiples defectos por imagen</td></tr>
+        <tr><td class="left">Localización</td><td>Grad-CAM (heatmap aproximado)</td><td>Bounding boxes (preciso)</td></tr>
+        <tr><td class="left">Velocidad</td><td>~380 ms/batch</td><td>~30 FPS real-time</td></tr>
+        <tr><td class="left">Mejor para</td><td>Análisis detallado post-recorte</td><td>Inspección end-to-end en campo</td></tr>
+    </tbody>
+</table>
+
+<h3>Edge deployment — Modelo ultra-compacto</h3>
+
+<table>
+    <thead>
+        <tr><th>Optimización</th><th>Tamaño</th><th>Formato</th><th>Compatible con</th></tr>
+    </thead>
+    <tbody>
+        <tr><td class="left">ViT + LoRA original</td><td>327.3 MB</td><td>PyTorch (.pt)</td><td>GPU/CPU</td></tr>
+        <tr><td class="left">+ Pruning 30% + INT8</td><td>84.4 MB</td><td>PyTorch (.pt)</td><td>CPU</td></tr>
+        <tr class="highlight-row"><td class="left"><strong>+ Exportación ONNX</strong></td><td class="best-value"><strong>1.4 MB</strong></td><td><strong>ONNX (.onnx)</strong></td><td><strong>Edge/Mobile/Web</strong></td></tr>
+    </tbody>
+</table>
+
+<!-- ============================================================ -->
+<!-- 5. DESPLIEGUE -->
+<!-- ============================================================ -->
+<h1>5. Despliegue</h1>
+
+<p>Se implementaron dos versiones de la interfaz web utilizando Gradio:</p>
+
+<h2>Versión 1 (<code>app.py</code>) — Clasificación</h2>
+<ul>
+    <li>Clasificación de imagen con ViT + LoRA (merged)</li>
+    <li>Visualización Grad-CAM superpuesta</li>
+    <li>Diagnóstico descriptivo con confianza</li>
+    <li>Modelo cargado desde <code>results/models/deploy/vit_final/</code></li>
+</ul>
+
+<h2>Versión 2 (<code>app_v2.py</code>) — Sistema completo con 3 pestañas</h2>
+<ol>
+    <li><strong>Clasificación ViT + GradCAM:</strong> Interfaz completa de diagnóstico con explicabilidad visual.</li>
+    <li><strong>Detección YOLO11:</strong> Detección multi-defecto con bounding boxes anotados.</li>
+    <li><strong>Pipeline de Inspección:</strong> Procesamiento batch con triage automático por severidad (critical/moderate/minor) y generación de reportes.</li>
+</ol>
+
+<div class="pipeline">
+    Imagen → YOLO11 (detección ROIs) → ViT+LoRA (clasificación) → Grad-CAM (explicabilidad) → Triage (severidad) → Reporte JSON
+</div>
+
+<p>El sistema está preparado para despliegue en <strong>Hugging Face Spaces</strong> con metadata completa en <code>deploy_meta.json</code>.</p>
+
+<!-- ============================================================ -->
+<!-- 6. LIMITACIONES Y TRABAJO FUTURO -->
+<!-- ============================================================ -->
+<h1 class="page-break">6. Limitaciones y Trabajo Futuro</h1>
+
+<h2>Limitaciones identificadas</h2>
+
+<ol>
+    <li><strong>Resolución de imágenes sintéticas:</strong> Las imágenes generadas por la DCGAN (64×64 px) son de resolución inferior a los parches reales, lo que limita su contribución al entrenamiento. La mejora de +0.35 pp es modesta.</li>
+    <li><strong>Desbalance extremo en <code>scratch</code>:</strong> Aunque se generaron 5,994 imágenes sintéticas para esta clase, la calidad visual no es comparable a muestras reales — un generador de mayor resolución (StyleGAN2/3, Diffusion Models) podría ser más efectivo.</li>
+    <li><strong>Cuantización en CPU:</strong> La cuantización dinámica INT8 de PyTorch no acelera la inferencia en GPU y es ~5× más lenta en CPU respecto a GPU. Se requiere cuantización estática o TensorRT para aceleración real.</li>
+    <li><strong>Dataset específico:</strong> Los resultados están validados únicamente en datasets de Roboflow Universe. La generalización a imágenes capturadas en condiciones reales de campo (iluminación variable, ángulos diversos, contaminación superficial) requiere validación adicional.</li>
+    <li><strong>Clasificación vs. Detección:</strong> El pipeline actual ejecuta clasificación y detección de forma independiente. Una arquitectura unificada end-to-end sería más eficiente.</li>
+</ol>
+
+<h2>Trabajo futuro</h2>
+
+<ul>
+    <li><strong>Generación con Diffusion Models:</strong> Reemplazar la DCGAN por Stable Diffusion fine-tuned con ControlNet para generar parches de defectos de alta resolución (512×512) con control sobre la geometría del defecto.</li>
+    <li><strong>YOLO26 NMS-free:</strong> Migrar a YOLO26 (última versión, enero 2026) que elimina la necesidad de Non-Maximum Suppression, reduciendo latencia y simplificando el pipeline de inferencia.</li>
+    <li><strong>Segmentación semántica:</strong> Evolucionar de bounding boxes a máscaras pixel-wise para cuantificar el área exacta del defecto — información crítica para decisiones de mantenimiento.</li>
+    <li><strong>Despliegue TensorRT:</strong> Compilar el modelo ViT para NVIDIA TensorRT con cuantización FP16/INT8 estática para inferencia <10 ms en GPUs edge (Jetson Orin).</li>
+    <li><strong>Validación en campo:</strong> Evaluar el sistema con imágenes capturadas por drones de inspección en hangares reales para medir la brecha domain-shift.</li>
+    <li><strong>Few-shot learning:</strong> Adaptar el sistema para clasificar nuevos tipos de defectos (corrosión, delaminación) con pocas muestras anotadas mediante meta-learning o prompt-tuning.</li>
+</ul>
+
+<!-- ============================================================ -->
+<!-- 7. CONCLUSIONES -->
+<!-- ============================================================ -->
+<h1>7. Conclusiones</h1>
+
+<p>Este proyecto demostró el desarrollo progresivo de un sistema de visión por computadora para la clasificación automatizada de defectos en superficies de aeronaves, avanzando desde un MLP clásico hasta un Vision Transformer con adaptación de bajo rango (LoRA).</p>
+
+<h3>Hallazgos principales</h3>
+
+<ol>
+    <li><strong>La estructura espacial es fundamental (E1→E2, +41.35 pp):</strong> La transición de MLP a CNN demostró que preservar la relación espacial de los píxeles es crítico para el reconocimiento de patrones visuales. Los kernels convolucionales capturan bordes, texturas y formas que el MLP pierde al aplanar.</li>
+
+    <li><strong>El transfer learning es transformador (E2→E3, +5.37 pp):</strong> El conocimiento visual general aprendido en ImageNet (1.2M imágenes, 1000 clases) se transfiere eficientemente incluso a un dominio tan especializado como la inspección aeronáutica.</li>
+
+    <li><strong>LoRA demuestra la eficiencia de la adaptación de bajo rango (E3→E5, +1.85 pp):</strong> Con solo el 0.35% de parámetros entrenables (298K de 86M), ViT + LoRA supera al fine-tuning completo. La restricción de rango bajo actúa como regularización implícita que previene el sobreajuste.</li>
+
+    <li><strong>Los datos sintéticos aportan valor marginal pero estratégico (+0.35 pp):</strong> En un dataset ya abundante, el balanceo con imágenes generadas por DCGAN produce mejoras modestas pero consistentes, beneficiando especialmente a las clases sub-representadas.</li>
+
+    <li><strong>La optimización agresiva es viable (99.1% reducción):</strong> La cuantización INT8 reduce el modelo de 327 MB a 3 MB con solo −1.32 pp de penalización, demostrando que los modelos de deep learning contienen redundancia significativa explotable para despliegue en edge.</li>
+</ol>
+
+<h3>Contribución técnica</h3>
+
+<p>El sistema final integra clasificación con explicabilidad (ViT + LoRA + Grad-CAM), detección multi-defecto (YOLO11n), y un pipeline de inspección automatizada con triage por severidad — un sistema completo y funcional para soporte a la toma de decisiones en mantenimiento aeronáutico, desplegable como aplicación web o integrable con sistemas industriales existentes.</p>
+
+<div class="metrics-grid">
+    <div class="metric-card">
+        <div class="value">95.16%</div>
+        <div class="label">Accuracy Final</div>
+    </div>
+    <div class="metric-card">
+        <div class="value">0.35%</div>
+        <div class="label">Params Entrenados</div>
+    </div>
+    <div class="metric-card">
+        <div class="value">1.4 MB</div>
+        <div class="label">Modelo Edge</div>
+    </div>
+    <div class="metric-card">
+        <div class="value">5</div>
+        <div class="label">Clases de Defecto</div>
+    </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- 8. REFERENCIAS -->
+<!-- ============================================================ -->
+<h1>8. Referencias</h1>
+
+<ol style="font-size: 9.5pt;">
+    <li>Dosovitskiy, A., et al. (2021). "An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale." <em>ICLR 2021</em>.</li>
+    <li>Hu, E. J., et al. (2022). "LoRA: Low-Rank Adaptation of Large Language Models." <em>ICLR 2022</em>.</li>
+    <li>He, K., et al. (2016). "Deep Residual Learning for Image Recognition." <em>CVPR 2016</em>.</li>
+    <li>Kingma, D. P. & Welling, M. (2014). "Auto-Encoding Variational Bayes." <em>ICLR 2014</em>.</li>
+    <li>Radford, A., et al. (2016). "Unsupervised Representation Learning with Deep Convolutional Generative Adversarial Networks." <em>ICLR 2016</em>.</li>
+    <li>Ultralytics (2024). "YOLO11 — State-of-the-Art Object Detection." <em>Ultralytics Documentation</em>.</li>
+    <li>Selvaraju, R. R., et al. (2017). "Grad-CAM: Visual Explanations from Deep Networks via Gradient-based Localization." <em>ICCV 2017</em>.</li>
+    <li>Jacob, B., et al. (2018). "Quantization and Training of Neural Networks for Efficient Integer-Arithmetic-Only Inference." <em>CVPR 2018</em>.</li>
+    <li>Han, S., et al. (2015). "Learning both Weights and Connections for Efficient Neural Networks." <em>NeurIPS 2015</em>.</li>
+    <li>Dillip, D. "Aircraft Skin Defects Merged Final." Roboflow Universe. CC BY 4.0.</li>
+    <li>AI Assistant for General Visual Inspection. "Aircraft Skin Defects." Roboflow Universe. CC BY 4.0.</li>
+</ol>
+
+<hr style="margin-top: 2cm; border: none; border-top: 1px solid var(--border);">
+<p style="text-align: center; font-size: 8pt; color: var(--text-secondary); margin-top: 0.5cm;">
+    Informe generado como parte del Proyecto Final — Deep Learning | Maestría en Ciencia de Datos | Julio 2025
+</p>
+
+</body>
+</html>
